@@ -1,17 +1,13 @@
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework import viewsets
-from rest_framework.response import Response
-from rest_framework import status
 from django.shortcuts import get_object_or_404
+from rest_framework import status
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
-from posts.models import Group, Post, Comment, User
+from posts.models import Group, Post, User
 from .permissions import IsAuthorOrReadOnly
-from .serializers import PostSerializer, UserSerializer, GroupSerializer, CommentSerializer, CommentListSerializer
-
-
-class PermissionDenied(Exception):
-    """Исключение при попытке изменения/удаления чужого контента."""
-    pass
+from .serializers import (
+    PostSerializer, UserSerializer, GroupSerializer, CommentSerializer)
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
